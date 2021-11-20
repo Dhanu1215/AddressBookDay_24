@@ -1,14 +1,19 @@
 package com.blp.addressbook;
 
-import java.util.ArrayList;
-import java.util.ConcurrentModificationException;
-import java.util.HashMap;
-import java.util.Scanner;
+import java.util.*;
+import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 public class AddressBook {
     private static ArrayList<Contacts> list = new ArrayList<Contacts>();
 
+    /**
+     * Call method to check entry in contact by searching state
+     */
+    private void sortByFirstname() {
+        List<Contacts> check = list.stream().sorted(Comparator.comparing(str->str.getFirstName())).collect(Collectors.toList());;
+        check.forEach(str -> System.out.println(str.toString()));
+    }
 
     /**
      * Call method to check entry in contact by searching state
@@ -115,11 +120,11 @@ public class AddressBook {
             }
         }
     }
+
     /*
      * Call method to add contacts in ArrayList
      * Create object and add details in it and put it in that list
      */
-
     public void AddContactsDetails() {
         Scanner sc = new Scanner(System.in);
         System.out.println("First Name = ");
@@ -166,6 +171,7 @@ public class AddressBook {
             System.out.println("5. Search entry by city");
             System.out.println("6. Search entry by state");
             System.out.println("7. Get count by city");
+            System.out.println("8. sort by firstname");
             System.out.println("Enter Your Choice");
             int choice = sc.nextInt();
             switch (chooseAddressBook) {
@@ -184,6 +190,8 @@ public class AddressBook {
                         book1.searchPersonByState();
                     } else if (choice == 7) {
                         book1.getCountByCity();
+                    } else if (choice == 8) {
+                        book1.sortByFirstname();
                     }
                     break;
                 case 2:
