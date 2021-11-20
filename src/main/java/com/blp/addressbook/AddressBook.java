@@ -8,7 +8,15 @@ public class AddressBook {
     private static ArrayList<Contacts> list = new ArrayList<Contacts>();
 
     /**
-     * Call method to check entry in contact by searching state
+     * Call method to sort entry in contact by firstname
+     */
+    private void sortByCity() {
+        List<Contacts> check = list.stream().sorted(Comparator.comparing(str->str.getCity())).collect(Collectors.toList());;
+        check.forEach(str -> System.out.println(str.toString()));
+    }
+
+    /**
+     * Call method to sort entry in contact by firstname
      */
     private void sortByFirstname() {
         List<Contacts> check = list.stream().sorted(Comparator.comparing(str->str.getFirstName())).collect(Collectors.toList());;
@@ -16,7 +24,7 @@ public class AddressBook {
     }
 
     /**
-     * Call method to check entry in contact by searching state
+     * Call method to count entry in contact by city
      */
     private void getCountByCity() {
         Scanner sc = new Scanner(System.in);
@@ -172,6 +180,7 @@ public class AddressBook {
             System.out.println("6. Search entry by state");
             System.out.println("7. Get count by city");
             System.out.println("8. sort by firstname");
+            System.out.println("9. sort by city");
             System.out.println("Enter Your Choice");
             int choice = sc.nextInt();
             switch (chooseAddressBook) {
@@ -192,6 +201,8 @@ public class AddressBook {
                         book1.getCountByCity();
                     } else if (choice == 8) {
                         book1.sortByFirstname();
+                    } else if (choice == 9) {
+                        book1.sortByCity();
                     }
                     break;
                 case 2:
