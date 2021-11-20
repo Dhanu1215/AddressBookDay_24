@@ -1,12 +1,24 @@
 package com.blp.addressbook;
 
 import java.util.ArrayList;
+import java.util.ConcurrentModificationException;
 import java.util.HashMap;
 import java.util.Scanner;
 import java.util.stream.Stream;
 
 public class AddressBook {
     private static ArrayList<Contacts> list = new ArrayList<Contacts>();
+
+    /**
+     * Call method to check entry in contact by searching state
+     */
+    private void searchPersonByState() {
+        Scanner sc = new Scanner(System.in);
+        System.out.println("Enter state to check entry in Contacts: ");
+        String state = sc.nextLine();
+        Stream<Contacts> check = list.stream().filter(i -> i.getState().equals(state));
+        check.forEach(str -> System.out.println(str.toString()));
+    }
 
     /**
      * Call method to check entry in contact by searching city
@@ -33,17 +45,21 @@ public class AddressBook {
     /**
      * Call method to delete contact by searching firstname in contact list
      */
-    private void deleteContact() {
+    private void deleteContact() throws ConcurrentModificationException {
         Scanner sc = new Scanner(System.in);
         System.out.println("Enter firstname to Delete Contact: ");
         String name = sc.nextLine();
-        for (Contacts search : list) {
-            if (name.equalsIgnoreCase(search.getFirstName())) {
-                System.out.println("Entered name found in the Address Book, deleting contact");
-                list.remove(search);
-            } else {
-                System.out.println("Entered name not found in the Address Book");
+        try {
+            for (Contacts search : list) {
+                if (name.equalsIgnoreCase(search.getFirstName())) {
+                    System.out.println("Entered name found in the Address Book, deleting contact");
+                    list.remove(search);
+                } else {
+                    System.out.println("Entered name not found in the Address Book");
+                }
             }
+        } catch (ConcurrentModificationException e) {
+            System.out.println("Exception is "+e.toString());
         }
     }
 
@@ -131,12 +147,12 @@ public class AddressBook {
         int chooseAddressBook = sc.nextInt();
         System.out.println("Choose What to do in this Address Book");
         while (chooseAddressBook >= 1) {
-            System.out.println(" ");
             System.out.println("1. Add Contacts");
             System.out.println("2. Edit Contacts");
             System.out.println("3. Delete Contacts");
             System.out.println("4. check duplicate entry");
             System.out.println("5. Search entry by city");
+            System.out.println("6. Search entry by state");
             System.out.println("Enter Your Choice");
             int choice = sc.nextInt();
             switch (chooseAddressBook) {
@@ -149,9 +165,10 @@ public class AddressBook {
                         book1.deleteContact();
                     } else if (choice == 4) {
                         book1.checkDuplicateEntry();
-                    }
-                    else if (choice == 5) {
+                    } else if (choice == 5) {
                         book1.searchPersonByCity();
+                    } else if (choice == 6) {
+                        book1.searchPersonByState();
                     }
                     break;
                 case 2:
@@ -163,8 +180,10 @@ public class AddressBook {
                         book2.deleteContact();
                     } else if (choice == 4) {
                         book2.checkDuplicateEntry();
-                    }else if (choice == 5) {
+                    } else if (choice == 5) {
                         book2.searchPersonByCity();
+                    } else if (choice == 6) {
+                        book2.searchPersonByState();
                     }
                     break;
                 case 3:
@@ -176,8 +195,10 @@ public class AddressBook {
                         book3.deleteContact();
                     } else if (choice == 4) {
                         book3.checkDuplicateEntry();
-                    }else if (choice == 5) {
+                    } else if (choice == 5) {
                         book3.searchPersonByCity();
+                    } else if (choice == 6) {
+                        book3.searchPersonByState();
                     }
                     break;
                 default:
