@@ -9,6 +9,18 @@ import java.util.stream.Stream;
 public class AddressBook {
     private static ArrayList<Contacts> list = new ArrayList<Contacts>();
 
+
+    /**
+     * Call method to check entry in contact by searching state
+     */
+    private void getCountByCity() {
+        Scanner sc = new Scanner(System.in);
+        System.out.println("Enter city to get count of entry in Contacts: ");
+        String city = sc.nextLine();
+        long check = list.stream().filter(i -> i.getCity().equals(city)).count();
+        System.out.println("Count of contacts in address book by city is " + check);
+    }
+
     /**
      * Call method to check entry in contact by searching state
      */
@@ -59,7 +71,7 @@ public class AddressBook {
                 }
             }
         } catch (ConcurrentModificationException e) {
-            System.out.println("Exception is "+e.toString());
+            System.out.println("Exception is " + e.toString());
         }
     }
 
@@ -153,6 +165,7 @@ public class AddressBook {
             System.out.println("4. check duplicate entry");
             System.out.println("5. Search entry by city");
             System.out.println("6. Search entry by state");
+            System.out.println("7. Get count by city");
             System.out.println("Enter Your Choice");
             int choice = sc.nextInt();
             switch (chooseAddressBook) {
@@ -169,6 +182,8 @@ public class AddressBook {
                         book1.searchPersonByCity();
                     } else if (choice == 6) {
                         book1.searchPersonByState();
+                    } else if (choice == 7) {
+                        book1.getCountByCity();
                     }
                     break;
                 case 2:
@@ -184,6 +199,8 @@ public class AddressBook {
                         book2.searchPersonByCity();
                     } else if (choice == 6) {
                         book2.searchPersonByState();
+                    } else if (choice == 7) {
+                        book2.getCountByCity();
                     }
                     break;
                 case 3:
@@ -199,6 +216,8 @@ public class AddressBook {
                         book3.searchPersonByCity();
                     } else if (choice == 6) {
                         book3.searchPersonByState();
+                    } else if (choice == 7) {
+                        book3.getCountByCity();
                     }
                     break;
                 default:
