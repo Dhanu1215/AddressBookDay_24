@@ -7,7 +7,6 @@ import java.util.stream.Stream;
 
 public class AddressBook {
     private static ArrayList<Contacts> list = new ArrayList<Contacts>();
-    public Contacts person;
 
     /**
      * Call method to check duplicate entry
@@ -16,11 +15,8 @@ public class AddressBook {
         Scanner sc = new Scanner(System.in);
         System.out.println("Enter firstname to Check duplicate entry Contact: ");
         String name = sc.nextLine();
-        for ( Contacts search : list) {
-            System.out.println(search.getFirstName());
-            Stream<Contacts> check = list.stream().filter(i->i.getFirstName().equals(name));
-            check.forEach(str-> System.out.println(str.toString()));
-        }
+        Stream<Contacts> check = list.stream().filter(i -> i.getFirstName().equals(name));
+        check.forEach(str -> System.out.println(str.toString()));
     }
 
     /**
@@ -74,7 +70,7 @@ public class AddressBook {
                 System.out.println("Enter the updated emailID");
                 String email = sc.next();
                 search.setEmail(email);
-                search.display();
+                search.toString();
             } else {
                 System.out.println("Entered name not found in the AddressBook");
             }
@@ -105,7 +101,7 @@ public class AddressBook {
         String email = sc.nextLine();
         Contacts person = new Contacts(firstName, lastName, address, city, state, zip, phoneNumber, email);
         list.add(person);
-        person.display();
+        person.toString();
     }
 
     public static void main(String[] args) {
@@ -139,7 +135,7 @@ public class AddressBook {
                         book1.editContact();
                     } else if (choice == 3) {
                         book1.deleteContact();
-                    }else if (choice == 4) {
+                    } else if (choice == 4) {
                         book1.checkDuplicateEntry();
                     }
                     break;
@@ -150,7 +146,7 @@ public class AddressBook {
                         book2.editContact();
                     } else if (choice == 3) {
                         book2.deleteContact();
-                    }else if (choice == 4) {
+                    } else if (choice == 4) {
                         book2.checkDuplicateEntry();
                     }
                     break;
@@ -161,7 +157,7 @@ public class AddressBook {
                         book3.editContact();
                     } else if (choice == 3) {
                         book3.deleteContact();
-                    }else if (choice == 4) {
+                    } else if (choice == 4) {
                         book3.checkDuplicateEntry();
                     }
                     break;
