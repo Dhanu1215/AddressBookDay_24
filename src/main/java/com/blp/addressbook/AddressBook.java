@@ -5,10 +5,10 @@ import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 public class AddressBook {
-    private static ArrayList<Contacts> list = new ArrayList<Contacts>();
+    private static final ArrayList<Contacts> list = new ArrayList<Contacts>();
 
     /**
-     * Call method to sort entry in contact by firstname
+     * Call method to sort entry in contact by city
      */
     private void sortByCity() {
         List<Contacts> check = list.stream().sorted(Comparator.comparing(str->str.getCity())).collect(Collectors.toList());;
