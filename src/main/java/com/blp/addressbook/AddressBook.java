@@ -9,6 +9,17 @@ public class AddressBook {
     private static ArrayList<Contacts> list = new ArrayList<Contacts>();
 
     /**
+     * Call method to check entry in contact by searching city
+     */
+    private void searchPersonByCity() {
+        Scanner sc = new Scanner(System.in);
+        System.out.println("Enter city to check entry in Contacts: ");
+        String city = sc.nextLine();
+        Stream<Contacts> check = list.stream().filter(i -> i.getCity().equals(city));
+        check.forEach(str -> System.out.println(str.toString()));
+    }
+
+    /**
      * Call method to check duplicate entry
      */
     private void checkDuplicateEntry() {
@@ -125,6 +136,7 @@ public class AddressBook {
             System.out.println("2. Edit Contacts");
             System.out.println("3. Delete Contacts");
             System.out.println("4. check duplicate entry");
+            System.out.println("5. Search entry by city");
             System.out.println("Enter Your Choice");
             int choice = sc.nextInt();
             switch (chooseAddressBook) {
@@ -138,6 +150,9 @@ public class AddressBook {
                     } else if (choice == 4) {
                         book1.checkDuplicateEntry();
                     }
+                    else if (choice == 5) {
+                        book1.searchPersonByCity();
+                    }
                     break;
                 case 2:
                     if (choice == 1) {
@@ -148,6 +163,8 @@ public class AddressBook {
                         book2.deleteContact();
                     } else if (choice == 4) {
                         book2.checkDuplicateEntry();
+                    }else if (choice == 5) {
+                        book2.searchPersonByCity();
                     }
                     break;
                 case 3:
@@ -159,6 +176,8 @@ public class AddressBook {
                         book3.deleteContact();
                     } else if (choice == 4) {
                         book3.checkDuplicateEntry();
+                    }else if (choice == 5) {
+                        book3.searchPersonByCity();
                     }
                     break;
                 default:
